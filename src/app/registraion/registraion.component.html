@@ -1,0 +1,112 @@
+<p>registraion works!</p>
+
+<!-- <mat-card appearance="outlined" class="container">
+    <mat-card appearance="outlined" class="left_container">
+        <img [src]="imgPath" height="50px" width="50px" />
+        <h2>Create a Google Account</h2>
+        <h4>Enter your name</h4>
+    </mat-card>
+    <mat-card appearance="outlined" class="right_container">
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" class="input_box">
+        </mat-form-field>
+        <div class="example-button-row">
+            <button mat-flat-button>Next</button>
+        </div>
+    </mat-card>
+    
+</mat-card> -->
+
+
+<mat-card appearance="outlined" class="container">
+    <mat-card appearance="outlined" class="left_container">
+        <img [src]="imgPath" height="50px" width="50px" />
+        <h2>Create a Google Account</h2>
+        <h4>{{ getCurrentStepMessage() }}</h4>
+    </mat-card>
+    
+    <mat-card appearance="outlined" class="right_container">
+        <!-- Name Step -->
+        @if (currentStep === 'name') {
+        <form (ngSubmit)="onNextName()">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput 
+                       placeholder="Name" 
+                       [(ngModel)]="name" 
+                       name="name" 
+                       required 
+                       #nameInput="ngModel"
+                       class="input_box">
+                <mat-error *ngIf="nameInput.invalid">Name is required</mat-error>
+            </mat-form-field>
+            
+            <div class="example-button-row">
+                <button mat-flat-button type="submit" [disabled]="!name">Next</button>
+            </div>
+        </form>
+        }
+
+        <!-- Email Step -->
+        @if (currentStep === 'email') {
+        <form (ngSubmit)="onNextEmail()">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput 
+                       placeholder="Enter your email" 
+                       type="email" 
+                       [(ngModel)]="email" 
+                       name="email" 
+                       required 
+                       email 
+                       #emailInput="ngModel">
+                <mat-error *ngIf="emailInput.invalid">
+                    @if (emailInput.errors?.['required']) {
+                        Email is required
+                    }
+                    @if (emailInput.errors?.['email']) {
+                        Enter a valid email
+                    }
+                </mat-error>
+            </mat-form-field>
+            
+            <div class="example-button-row">
+                <button mat-button type="button" (click)="goBack()">Back</button>
+                <button mat-flat-button type="submit" [disabled]="emailInput.invalid">Next</button>
+            </div>
+        </form>
+        }
+
+        <!-- Password Step -->
+        @if (currentStep === 'password') {
+        <form (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput 
+                       placeholder="Enter your password" 
+                       type="password" 
+                       [(ngModel)]="password" 
+                       name="password" 
+                       required 
+                       minlength="8" 
+                       #passwordInput="ngModel">
+                <mat-error *ngIf="passwordInput.invalid">
+                    @if (passwordInput.errors?.['required']) {
+                        Password is required
+                    }
+                    @if (passwordInput.errors?.['minlength']) {
+                        Password must be at least 8 characters
+                    }
+                </mat-error>
+            </mat-form-field>
+            
+            <div class="example-button-row">
+                <button mat-button type="button" (click)="goBack()">Back</button>
+                <button mat-flat-button type="submit" [disabled]="passwordInput.invalid">Submit</button>
+            </div>
+        </form>
+        }
+    </mat-card>
+</mat-card>

@@ -1,0 +1,59 @@
+.container{
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 350px;
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    border: 1px solid black;
+}
+
+.left_container{
+    width: 40%;
+    height: 100%;
+    padding: 40px;
+    background-color: black;
+    border: 1px solid black;
+}
+
+.right_container{
+    width: 60%;
+    height: 100%;
+    padding: 90px;
+    background-color: black;
+    border: 2px solid black;
+    gap: 20px;
+}
+
+.input_box{
+    border: 2px solid white;
+}
+
+.example-button-row {
+    display: table-cell;
+    max-width: 600px;
+    padding-left: 80%;
+  }
+
+.example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+    
+  }
+
+  .input_box {
+    border: 2px solid white;
+    width: 100%; /* Make the input field take the full width of the container */
+}
+
+mat-form-field {
+    width: 100%; /* Ensure the material form field takes the full width */
+}
+
+  
+
+.example-button-row{
+    display: flex;
+}

@@ -1,0 +1,60 @@
+<div class="Container">
+    <div class="left">
+        <img [src]="imgPath" height="50px" width="50px" />
+        <h2>Sign in</h2>
+        <h4>Use your Google Account</h4>
+    </div>
+
+    <div class="right">
+        <div class="email_container">
+            <form class="example-form" (ngSubmit)="LogIn()">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                        placeholder="Ex. pat@example.com" class="email_input">
+                    <mat-hint>Errors appear instantly!</mat-hint>
+                    
+                    @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+                    <mat-error>Please enter a valid email address</mat-error>
+                    }
+                    @if (emailFormControl.hasError('required')) {
+                    <mat-error>Email is <strong>required</strong></mat-error>
+                    }
+                </mat-form-field>
+                <p>Enter an email or phone number</p>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+                        placeholder="***********" class="password_input">
+                    <mat-hint>Password must be at least 8 characters long.</mat-hint>
+                    <mat-error *ngIf="passwordFormControl.hasError('required')">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+                        Password must be at least <strong>8 characters</strong> long
+                    </mat-error>
+                </mat-form-field>
+
+                <button mat-raised-button type="submit">submit</button>
+            </form>
+            
+        </div>
+
+        <div class="forgot_email">
+
+             <button mat-button>Forgot password</button>
+
+            <p>Not your computer? Use Guest mode to sign in privately.
+                <br>
+                <span>Learn more about using Guest mode</span>
+            </p>
+        </div>
+
+        <div class="button_container">
+            <button mat-button (click)="routeToRegistraion();">Create account</button>
+           
+        </div>
+    </div>
+
+</div>

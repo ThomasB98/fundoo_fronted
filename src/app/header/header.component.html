@@ -1,11 +1,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
 <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon (click)="sidenav.toggle();">menu</mat-icon>
+    <button (click)="sidenav.toggle();" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon >menu</mat-icon>
     </button>
     <span>
-        <div class="app-icon">
+        <div class="app-icon" (click)="onClickNotes();">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
                 <linearGradient id="kM1uKwC9sUKGexMTNJd_qa" x1="21.854" x2="25.223" y1="4.726" y2="41.333"
                     gradientUnits="userSpaceOnUse">
@@ -51,7 +51,7 @@
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side">
-        <div tabindex="0">
+        <div tabindex="0" (click)="onClickNotes();">
             <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -130,7 +130,7 @@
         </div>
 
 
-        <div tabindex="0">
+        <div tabindex="0" (click)="onArchiveClick();">
             <svg width="32px" height="32px" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -141,10 +141,10 @@
                     <path d="M4.5 7.5H20.5" stroke="#121923" stroke-width="1.475"></path>
                 </g>
             </svg>
-            <mat-nav-list>Archive</mat-nav-list>
+            <mat-nav-list >Archive</mat-nav-list>
         </div>
 
-        <div tabindex="0">
+        <div tabindex="0" (click)="onTrashClick();">
             <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -171,6 +171,14 @@
 </mat-sidenav-container>
 
 <div class="getnotes_container">
-    <app-getnotes></app-getnotes>
+    <app-getnotes [ngStyle]="{'opacity': (archiveClick || trashClick) ? '0' : '1'}" (trashNotesEmitter)="trashNotesArray($event)"  (archivedNotesEmitter)="archivedNotesArray($event)" [archiveClick]="archiveClick" [trashClick]="trashClick"></app-getnotes>
+
+    <div class="display_archive" *ngIf="archiveClick">
+        <app-display-archive [notesList]="archivedNotes"></app-display-archive>
+    </div>
+
+    <div class="display_trash" *ngIf="trashClick">
+        <app-display-archive [notesList]="trashNotes"></app-display-archive>
+    </div>  
 </div>
 

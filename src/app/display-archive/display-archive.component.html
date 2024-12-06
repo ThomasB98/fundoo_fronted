@@ -1,0 +1,12 @@
+<div class="card_container">
+    <mat-card *ngFor="let note of notesList" style="background-color: {{note.color}};">
+        <mat-card-title (click)="openEditDialog(note)">{{note.title}}  </mat-card-title>
+        <mat-card-content  (click)="openEditDialog(note)">
+            {{note.content}}
+        </mat-card-content>
+        <img mat-card-image >
+        <mat-card-footer>
+            <app-appicons [note]="note" ></app-appicons>
+        </mat-card-footer>
+    </mat-card>
+</div>

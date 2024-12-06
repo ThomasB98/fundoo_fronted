@@ -8,6 +8,10 @@ import { Observable, tap } from 'rxjs';
 export class NoteService {
 
   noteCreated =new EventEmitter<void>();
+  noteUpdated =new EventEmitter<void>();
+  noteColoreUpdate=new EventEmitter<void>();
+  noteArchive = new EventEmitter<void>();
+  noteTrash = new EventEmitter<void>();
   
   constructor(private http:HttpService)  { }
 
@@ -65,5 +69,96 @@ export class NoteService {
         }
       })
     );
+  }
+
+  updateNote(reqData:any){
+    const  token=localStorage.getItem("token");
+    const url="https://localhost:7116/api/Note/update";
+    let header = {
+      headers: new HttpHeaders({
+        'Content-type':'application/json',
+        'Authorization':'Bearer '+ token
+      })
+    }
+    return this.http.putService(url,reqData,true,header).pipe(
+      tap(
+        (res:any)=>{
+          this.noteUpdated.emit();
+        }
+      )
+    );
+
+  }
+
+  archiveNote(noteId: number, isArchived: boolean){
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("User token is not available in local storage.");
+    }
+    const url = `https://localhost:7116/api/Note/archive/${noteId}?isArchived=${isArchived}`;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+    return this.http.putService(url, {}, true, httpOptions).pipe(
+      tap(
+        (res: any) => {
+          if (res.success) {
+            this.noteArchive.emit(); 
+          }
+        }
+      )
+    )
+  }
+
+  TrashNote(noteId:number,isDeleted:boolean){
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("User token is not available in local storage.");
+    }
+    const url = `https://localhost:7116/api/Note/Trash/${noteId}?isDeleted=${isDeleted}`;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+    return this.http.putService(url, {}, true, httpOptions).pipe(
+      tap(
+        (res: any) => {
+          if (res.success) {
+            this.noteTrash.emit(); 
+          }
+        }
+      )
+    )
+  }
+
+  colorUpdate(reqData:any){
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("User token is not available in local storage.");
+    }
+    const url='https://localhost:7116/api/Note/note/colorUpdate';
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+
+    return this.http.putService(url, reqData, true, httpOptions).pipe(
+      tap(
+        (res: any) => {
+          if (res.success) {
+            this.noteColoreUpdate.emit(); 
+          }
+        }
+      )
+    )
   }
 }

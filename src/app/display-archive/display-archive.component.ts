@@ -1,9 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import { AppiconsComponent } from '../appicons/appicons.component';
-import { title } from 'process';
 import { CommonModule } from '@angular/common';
-import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import {
   MatDialogModule,
   MAT_DIALOG_DATA,
@@ -14,32 +12,30 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 
 @Component({
-  selector: 'app-displaynote',
-  standalone:true,
+  selector: 'app-display-archive',
   imports: [
     MatCardModule,
     AppiconsComponent,
     CommonModule,
     MatDialogModule
   ],
-  templateUrl: './displaynote.component.html',
-  styleUrl: './displaynote.component.css'
+  templateUrl: './display-archive.component.html',
+  styleUrl: './display-archive.component.css'
 })
-export class DisplaynoteComponent{
-
-  @Input()notesList:any[]=[];
-
+export class DisplayArchiveComponent {
+  @Input() notesList:any[]=[];
+  
   constructor(public dialog:MatDialog) {  
   }
-
-  openEditDialog(note:any):void{
+  openEditDialog(note:any){
     const dialogbox=this.dialog.open(UpdatenoteComponent,{
       width:'50%',
       height:'auto',
       data:note
     })
   }
-
+  
 }

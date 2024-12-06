@@ -1,9 +1,19 @@
-.icon_container{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+
+.icon_container {
+    position: relative;
+    z-index: 1;
 }
+
+.menu-trigger {
+    position: relative;
+    z-index: 2;
+}
+
+.custom-menu {
+    z-index: 200;
+}
+
+
 
 .left-icons a{
     margin-left: 20px;
@@ -23,13 +33,6 @@
     padding: 6px;
     border-radius: 50%;
 }
-/* 
-.left-icons svg {
-    background-color: rgb(254, 239, 195);
-    padding: 6px;
-    border-radius: 50%;
-} */
-
 
 .clicked {
     background-color: rgb(254, 239, 195);
@@ -37,3 +40,21 @@
     border-radius: 50%;
   }
 
+.color_container{
+    padding: 8px;
+}
+
+.plate_button_div{
+    display:flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.colorIcon{
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+}

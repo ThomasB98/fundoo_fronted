@@ -1,0 +1,50 @@
+
+mat-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+mat-card-footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-card-title{
+    padding-left: 5%;
+}
+
+mat-card-content ,mat-card-footer{
+    margin-top: 5%;
+}
+
+button{
+    margin-right: 3%;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+}
+
+button:hover{
+    font-size: large;
+    background-color: #0056b3;
+}
+
+button:active {
+    background-color: #003f7f;
+    transform: scale(0.95); 
+}
+
+
+input{
+    width: 80%;
+    border: none; 
+    border-bottom: 2px solid #ccc; 
+    padding: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-bottom: 2px solid #007bff; 
+}

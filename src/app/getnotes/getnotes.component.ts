@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NoteinputComponent } from "../noteinput/noteinput.component";
 import { DisplaynoteComponent } from "../displaynote/displaynote.component";
 import { NoteService } from '../service/noteService/note.service';
@@ -15,8 +15,16 @@ import { log } from 'console';
 
 })
 export class GetnotesComponent implements OnInit{
-
   NotesArray:any[]=[];
+
+  trashNotesArray:any[]=[];
+  archivedNotesArray:any[]=[];
+
+  @Input() archiveClick!: boolean;
+  @Input() trashClick!:boolean;
+
+  @Output() trashNotesEmitter: EventEmitter<any[]> = new EventEmitter<any[]>();
+  @Output() archivedNotesEmitter: EventEmitter<any[]> = new EventEmitter<any[]>();
   constructor(private noteService:NoteService,private router:Router) {
   
   }
@@ -35,12 +43,36 @@ export class GetnotesComponent implements OnInit{
       (response:any)=>{
         console.log("printing response");
         console.log(response);
-        this.NotesArray=response;
+        this.NotesArray = response.data.filter(
+          (note: any) => note.isDeleted === false &&
+          note.isArchived===false
+        );
+
+        this.trashNotesArray = response.data.filter(
+          (note: any) => note.isDeleted === true
+        );
+  
+        this.archivedNotesArray = response.data.filter(
+          (note: any) => note.isArchived === true
+        );
+
         console.log("Notes fetched successfully:", this.NotesArray);
       },
       (error)=>{
         console.error('Error fetching notes:', error);
       }
     )
+  }
+
+
+  ngOnChanges(){
+    if(this.archiveClick){
+      this.archivedNotesEmitter.emit(this.archivedNotesArray);
+    }
+    
+    if(this.trashClick){
+      this.archiveClick=false;
+      this.trashNotesEmitter.emit(this.trashNotesArray);
+    }
   }
 }

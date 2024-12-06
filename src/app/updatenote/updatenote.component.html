@@ -1,0 +1,14 @@
+
+  <mat-card [style.background]="data.color">
+      <mat-card-title>
+        <input matInput [(ngModel)]="title" [style.background]="data.color" style="border: none;">
+      </mat-card-title>
+      <mat-card-content >
+        <input matInput [(ngModel)]="content" [style.background]="data.color" style="border: none;">
+      </mat-card-content>
+      <img mat-card-image >
+      <mat-card-footer>
+          <app-appicons [note]="data"></app-appicons>
+          <button mat-icon-button (click)="closeDialog()" style="opacity: 0.9; background: none; border: none; ">close</button>
+      </mat-card-footer>
+  </mat-card>

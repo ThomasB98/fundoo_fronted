@@ -1,7 +1,7 @@
 <div class="icon_container">
     <div class="left-icons">
-        <a href="#"><svg (click)="applyStyle($event)" width="24px" height="24px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000"
-                stroke="#000000" stroke-width="1.7759999999999998">
+        <a href="#"><svg (click)="applyStyle($event)" width="24px" height="24px" viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="1.7759999999999998">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -21,7 +21,7 @@
                     <path class="a" d="M19.3269,38.8253a4.6507,4.6507,0,0,0,9.3013.048v-.048"></path>
                 </g>
             </svg></a>
-        <a href="#"><svg (click)="applyStyle($event)"  width="24px" height="24px" viewBox="-2.5 0 32 32" version="1.1"
+        <a href="#"><svg (click)="applyStyle($event)" width="24px" height="24px" viewBox="-2.5 0 32 32" version="1.1"
                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
                 stroke="#000000" stroke-width="0.352">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -45,9 +45,9 @@
                         fill="#000000"> </path>
                 </g>
             </svg></a>
-        <a href="#"><svg (click)="applyStyle($event)"  fill="#000000" height="24px" width="24px" version="1.1" id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 496 496"
-                xml:space="preserve">
+        <a [matMenuTriggerFor]="plate"><svg (click)="applyStyle($event)" fill="#000000" height="24px" width="24px" version="1.1"
+                id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 496 496" xml:space="preserve">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -77,8 +77,9 @@
                     </g>
                 </g>
             </svg></a>
-        <a href="#"><svg (click)="applyStyle($event)"  width="24px" height="24px" viewBox="0 0 48 48" id="Layer_2" data-name="Layer 2"
-                xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="1.9200000000000004">
+        <a href="#"><svg (click)="applyStyle($event)" width="24px" height="24px" viewBox="0 0 48 48" id="Layer_2"
+                data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000"
+                stroke-width="1.9200000000000004">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -100,7 +101,7 @@
                     </path>
                 </g>
             </svg></a>
-        <a href="#"><svg width="24px" height="24px" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <a ><svg (click)="arciveNote()" width="24px" height="24px" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -111,7 +112,8 @@
                 </g>
             </svg></a>
         <a class="menu_triger" [matMenuTriggerFor]="menu">
-            <svg (click)="applyStyle($event)"  width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg  width="24px" height="24px" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -120,7 +122,7 @@
                     <circle cx="12" cy="18" r="1.5" fill="#000000"></circle>
                 </g>
             </svg></a>
-            
+
         <!-- <a href="#"><svg (click)="applyStyle($event)"  width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -142,9 +144,22 @@
             </svg></a> -->
     </div>
 </div>
-<div class="menu_container">
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
-      </mat-menu>
-</div>
+
+<mat-menu #menu="matMenu" class="custom-menu">
+    <button mat-menu-item (click)="deleteNote()">Delete note</button>
+    <button mat-menu-item>Change labels</button>
+    <button mat-menu-item>Add drawing</button>
+    <button mat-menu-item (click)="makeCopy()">Make a Copy</button>
+    <button mat-menu-item>show checkboxes</button>
+    <button mat-menu-item>Copy to Googlr Docs</button>
+    <button mat-menu-item>Version history</button>
+    <button mat-menu-item>Change labels</button>
+
+</mat-menu>
+
+
+<mat-menu #plate="matMenu" class="color_container">
+    <div *ngFor="let colors of colorArray" class="plate_button_div">
+        <button class="colorIcon" [style.background]="colors.code" [style.border]="colors.code" (click)="setColor(colors)"></button>
+    </div>
+</mat-menu>

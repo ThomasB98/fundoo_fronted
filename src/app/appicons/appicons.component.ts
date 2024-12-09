@@ -112,9 +112,9 @@ export class AppiconsComponent {
   }
 
   setColor(colors:any){
-    let reqdata={
-      color:colors,
-      id:this.note.id
+    const reqdata={
+      id:this.note.id,
+      color:colors.code
     }
     console.log(reqdata);
     this.noteService.colorUpdate(reqdata).subscribe(
@@ -124,7 +124,6 @@ export class AppiconsComponent {
         }
         else{
           console.log("color not changed");
-          
         }
       }
     )

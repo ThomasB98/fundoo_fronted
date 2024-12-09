@@ -62,6 +62,8 @@ export class NoteService {
         'Authorization':'Bearer '+ token
       })
     }
+
+    console.log(header);
     return this.http.PostServiceReset('https://localhost:7116/api/Note/create',reqData, true, header).pipe(
       tap((res:any)=>{
         if(res.success){
@@ -151,7 +153,7 @@ export class NoteService {
       })
     };
 
-    return this.http.putService(url, reqData, true, httpOptions).pipe(
+    return this.http.PostServiceReset(url, reqData, true, httpOptions).pipe(
       tap(
         (res: any) => {
           if (res.success) {

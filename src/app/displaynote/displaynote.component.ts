@@ -1,4 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+
+import { SearchService } from '../service/searchService/search.service';
+import { SearchPipe } from '../pipe/searchpipe/search.pipe';
+
 import {MatCardModule} from '@angular/material/card';
 import { AppiconsComponent } from '../appicons/appicons.component';
 import { title } from 'process';
@@ -14,6 +18,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { response } from 'express';
 
 @Component({
   selector: 'app-displaynote',
@@ -22,18 +27,29 @@ import {
     MatCardModule,
     AppiconsComponent,
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    SearchPipe
   ],
   templateUrl: './displaynote.component.html',
   styleUrl: './displaynote.component.css'
 })
-export class DisplaynoteComponent{
+export class DisplaynoteComponent implements OnInit{
 
   @Input()notesList:any[]=[];
 
-  constructor(public dialog:MatDialog) {  
+  filterNote:any;
+
+  constructor(public dialog:MatDialog,private _SearchService:SearchService) {  
   }
 
+  ngOnInit(): void {
+    this._SearchService.IncomingMessage.subscribe((response)=>{
+      console.log("Search in process");
+      this.filterNote =response;
+    })
+  }
+
+  
   openEditDialog(note:any):void{
     const dialogbox=this.dialog.open(UpdatenoteComponent,{
       width:'50%',

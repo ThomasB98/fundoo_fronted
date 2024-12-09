@@ -12,7 +12,7 @@ import { GetnotesComponent } from "../getnotes/getnotes.component";
 import { isPlatformBrowser } from '@angular/common';
 import { DisplayArchiveComponent } from "../display-archive/display-archive.component";
 
-
+import { SearchService } from '../service/searchService/search.service';
 
 
 @Component({
@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
   archivedNotes:any[]=[];
   trashNotes:any[]=[];
   
-  constructor(private router:Router){}
+  constructor(private router:Router,private _searchService:SearchService){}
   
 
   label_list=[
@@ -112,6 +112,12 @@ export class HeaderComponent implements OnInit {
   onClickNotes(){
     this.trashClick=false;
     this.archiveClick=false;
+  }
+
+
+  search(event:any){
+    console.log(event.target.value)
+    this._searchService.outgoingData(event.target.value)
   }
 
 }

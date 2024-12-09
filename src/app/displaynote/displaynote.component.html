@@ -1,5 +1,5 @@
 <div class="card_container">
-    <mat-card *ngFor="let note of notesList" [style.background]="note.color">
+    <mat-card *ngFor="let note of notesList | search : filterNote" [style.background]="note.color">
         <mat-card-title (click)="openEditDialog(note)">{{note.title}}</mat-card-title>
         <mat-card-content (click)="openEditDialog(note)">
             {{note.content}}

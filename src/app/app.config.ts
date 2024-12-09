@@ -6,6 +6,8 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
+import { AuthService } from './service/auth/auth.service';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
@@ -13,6 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()), 
     provideAnimationsAsync(),
     provideHttpClient(),
-    provideRouter(routes)
+    provideRouter(routes),
+    AuthService
   ]
 };
